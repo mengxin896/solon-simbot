@@ -7,16 +7,16 @@
 当前仓库已经替换为下面这些真实对外信息：
 
 1. 项目主页
-   - `https://gitee.com/chang_lu_mo/solon-simbot`
+   - `https://github.com/mengxin896/solon-simbot`
 2. 源码仓库信息
-   - `scm.url`: `https://gitee.com/chang_lu_mo/solon-simbot`
-   - `scm.connection`: `scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git`
-   - `scm.developerConnection`: `scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git`
+   - `scm.url`: `https://github.com/mengxin896/solon-simbot`
+   - `scm.connection`: `scm:git:https://github.com/mengxin896/solon-simbot.git`
+   - `scm.developerConnection`: `scm:git:https://github.com/mengxin896/solon-simbot.git`
 3. 维护者信息
-   - `id`: `chang_lu_mo`
-   - `name`: `常陆茉子`
-   - `email`: `6561354+chang_lu_mo@user.noreply.gitee.com`
-   - `url`: `https://gitee.com/chang_lu_mo`
+   - `id`: `mengxin896`
+   - `name`: `mx14`
+   - `email`: 当前 GitHub 主页未公开邮箱，`pom.xml` 暂不填写
+   - `url`: `https://github.com/mengxin896`
 
 ## 真实公开信息通常需要哪些
 

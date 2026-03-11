@@ -9,7 +9,7 @@
     <version>${revision}</version>
     <name>simbot-solon-starter</name>
     <description>Solon starter for Simbot applications</description>
-    <url>https://gitee.com/chang_lu_mo/solon-simbot</url>
+    <url>https://github.com/mengxin896/solon-simbot</url>
 
     <licenses>
         <license>
@@ -21,17 +21,16 @@
 
     <developers>
         <developer>
-            <id>chang_lu_mo</id>
-            <name>常陆茉子</name>
-            <email>6561354+chang_lu_mo@user.noreply.gitee.com</email>
-            <url>https://gitee.com/chang_lu_mo</url>
+            <id>mengxin896</id>
+            <name>mx14</name>
+            <url>https://github.com/mengxin896</url>
         </developer>
     </developers>
 
     <scm>
-        <url>https://gitee.com/chang_lu_mo/solon-simbot</url>
-        <connection>scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git</connection>
-        <developerConnection>scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git</developerConnection>
+        <url>https://github.com/mengxin896/solon-simbot</url>
+        <connection>scm:git:https://github.com/mengxin896/solon-simbot.git</connection>
+        <developerConnection>scm:git:https://github.com/mengxin896/solon-simbot.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
