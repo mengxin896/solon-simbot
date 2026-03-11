@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>love.forte.simbot.examples</groupId>
+    <artifactId>simbot-solon-onebot11-napcat-demo</artifactId>
+    <version>${revision}</version>
+    <name>simbot-solon-onebot11-napcat-demo</name>
+    <description>OneBot11 + NapCat demo application for simbot-solon-starter</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+
+        <solon.version>3.4.1</solon.version>
+        <kotlin.version>2.1.20</kotlin.version>
+        <kotlinx.coroutines.version>1.9.0</kotlinx.coroutines.version>
+        <ktor.version>2.3.12</ktor.version>
+        <slf4j.version>2.0.17</slf4j.version>
+
+        <!-- 使用本仓库发布的 starter 版本号；在 root 执行 mvn install 后即可被本地解析 -->
+        <simbot.solon.starter.version>${revision}</simbot.solon.starter.version>
+        <!-- OneBot v11 组件版本请按你的实际选择调整 -->
+        <simbot.onebot.version>1.8.2</simbot.onebot.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon</artifactId>
+            <version>${solon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>love.forte.simbot</groupId>
+            <artifactId>simbot-solon-starter</artifactId>
+            <version>${simbot.solon.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>love.forte.simbot.component</groupId>
+            <artifactId>simbot-component-onebot-v11-core-jvm</artifactId>
+            <version>${simbot.onebot.version}</version>
+        </dependency>
+
+        <!-- 提供 JVM 下 Ktor 默认可用的 client engine，供 OneBot 组件自动加载场景使用 -->
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-java-jvm</artifactId>
+            <version>${ktor.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>${kotlinx.coroutines.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <jvmTarget>${maven.compiler.release}</jvmTarget>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <mainClass>love.forte.simbot.solon.onebot11.demo.OneBot11NapCatDemoApp</mainClass>
+                    <workingDirectory>${project.basedir}</workingDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
