@@ -9,7 +9,7 @@
     <version>${revision}</version>
     <name>simbot-solon-starter</name>
     <description>Solon starter for Simbot applications</description>
-    <url>https://docs.simbot.forte.love</url>
+    <url>https://gitee.com/chang_lu_mo/solon-simbot</url>
 
     <licenses>
         <license>
@@ -21,17 +21,17 @@
 
     <developers>
         <developer>
-            <id>simbot-solon-starter-maintainers</id>
-            <name>simbot-solon-starter maintainers</name>
-            <organization>Simple Robot ecosystem</organization>
-            <organizationUrl>https://github.com/simple-robot</organizationUrl>
+            <id>chang_lu_mo</id>
+            <name>常陆茉子</name>
+            <email>6561354+chang_lu_mo@user.noreply.gitee.com</email>
+            <url>https://gitee.com/chang_lu_mo</url>
         </developer>
     </developers>
 
     <scm>
-        <url>https://private.example.invalid/simbot-solon-starter</url>
-        <connection>scm:git:https://private.example.invalid/simbot-solon-starter.git</connection>
-        <developerConnection>scm:git:ssh://git@private.example.invalid/simbot-solon-starter.git</developerConnection>
+        <url>https://gitee.com/chang_lu_mo/solon-simbot</url>
+        <connection>scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git</connection>
+        <developerConnection>scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

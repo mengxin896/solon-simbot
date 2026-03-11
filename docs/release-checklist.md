@@ -2,7 +2,23 @@
 
 本文档面向维护者，不面向业务接入方。
 
-## 真实公开信息需要补齐哪些
+## 当前已使用的真实公开信息
+
+当前仓库已经替换为下面这些真实对外信息：
+
+1. 项目主页
+   - `https://gitee.com/chang_lu_mo/solon-simbot`
+2. 源码仓库信息
+   - `scm.url`: `https://gitee.com/chang_lu_mo/solon-simbot`
+   - `scm.connection`: `scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git`
+   - `scm.developerConnection`: `scm:git:https://gitee.com/chang_lu_mo/solon-simbot.git`
+3. 维护者信息
+   - `id`: `chang_lu_mo`
+   - `name`: `常陆茉子`
+   - `email`: `6561354+chang_lu_mo@user.noreply.gitee.com`
+   - `url`: `https://gitee.com/chang_lu_mo`
+
+## 真实公开信息通常需要哪些
 
 在正式发布前，至少要确认下面这些信息是真实、可公开、可长期维护的：
 
@@ -27,10 +43,9 @@
 1. 确认最终 Maven 坐标
    - 如果继续使用当前坐标，就要确保你已经拥有对应 namespace 的发布权限
    - 如果准备改坐标，要同步更新 README、接入文档和示例工程
-2. 把 `pom.xml` 中的公开元数据替换成真实值
-   - 项目主页
-   - SCM 地址
-   - 维护者信息
+2. 确认当前 `groupId` 是否具备发布权限
+   - 目前仍是 `love.forte.simbot`
+   - 如果你没有这个 namespace 的发布权限，需要先改成你实际拥有权限的命名空间
 3. 准备 Maven Central 发布凭据
    - `CENTRAL_TOKEN_USERNAME`
    - `CENTRAL_TOKEN_PASSWORD`
@@ -56,3 +71,9 @@ mvn -q -Pcentral-release -DskipTests verify
    - `sources.jar`
    - `javadoc.jar`
 4. 再检查一遍 README、接入文档、示例工程里的版本号和 Maven 坐标是否一致
+5. 如果改过 `groupId`，记得同步检查：
+   - `README.md`
+   - `docs/integration-guide.md`
+   - `docs/user-app-from-zero.md`
+   - `docs/onebot11-napcat-guide.md`
+   - `examples/*/pom.xml`
