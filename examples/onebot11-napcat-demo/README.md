@@ -58,7 +58,7 @@ HTTP API 和事件 WebSocket 必须分开配置。
 进入示例目录执行：
 
 ```powershell
-cd E:\project\simbot-solon-starter\examples\onebot11-napcat-demo
+cd examples/onebot11-napcat-demo
 mvn -q -DskipTests compile exec:java
 ```
 

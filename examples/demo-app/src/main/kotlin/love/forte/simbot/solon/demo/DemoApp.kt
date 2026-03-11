@@ -17,10 +17,9 @@ import java.util.concurrent.atomic.AtomicInteger
  * 第四档：真实 Solon 应用集成测试
  *
  * 运行方式（先在仓库根目录执行一次 install）：
- * 1) `cd E:\project\simbot-solon-starter`
- * 2) `mvn -q -DskipTests install`
- * 3) `cd examples/demo-app`
- * 4) `mvn -q -DskipTests compile exec:java`
+ * 1) `mvn -q -DskipTests install`
+ * 2) `cd examples/demo-app`
+ * 3) `mvn -q -DskipTests compile exec:java`
  */
 object DemoApp {
 
@@ -68,4 +67,3 @@ class DemoListeners {
         println("onDemo invoked. eventId=${event.id}, service=${service.ping()}")
     }
 }
-

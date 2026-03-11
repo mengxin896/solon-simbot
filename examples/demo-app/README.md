@@ -24,7 +24,7 @@ mvn -q -DskipTests install
 进入示例目录执行：
 
 ```powershell
-cd E:\project\simbot-solon-starter\examples\demo-app
+cd examples/demo-app
 mvn -q -DskipTests compile exec:java
 ```
 

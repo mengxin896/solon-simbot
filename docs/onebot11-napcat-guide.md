@@ -322,20 +322,15 @@ mvn -q compile exec:java
 ### 如果你就是想要“服务没好也持续重试”
 
 那更适合采用“手动注册 + 外层重试”的方式。
-上游 sample 就是这么做的，参考：
-
-- [E:\project\solon simbot\.tmp-simpler-robot\samples\onebot11-solon-napcat\README.md](E:/project/solon simbot/.tmp-simpler-robot/samples/onebot11-solon-napcat/README.md)
-- [E:\project\solon simbot\.tmp-simpler-robot\samples\onebot11-solon-napcat\src\main\kotlin\com\example\Application.kt](E:/project/solon simbot/.tmp-simpler-robot/samples/onebot11-solon-napcat/src/main/kotlin/com/example/Application.kt)
-
-那个 sample 的思路是：
+这类方案的核心思路是：
 
 1. 先正常启动 Solon + starter
 2. 手动从 `simbotApplication` 取出应用实例
 3. 代码里注册 OneBot bot
 4. 如果启动失败，等待几秒后继续重试
 
-当前仓库新增的 `examples/onebot11-napcat-demo` 走的是“自动加载 bot JSON”的方式，更适合作为发布后用户工程模板。
-如果你后面需要，我可以再把这套“手动注册 + 外层重试版”也单独整理成第二个可运行 example。
+当前仓库提供的 `examples/onebot11-napcat-demo` 走的是“自动加载 bot JSON”的方式，更适合作为用户工程模板。
+如果你的场景必须依赖外层重试，可以在业务应用启动阶段按上面的思路自行扩展。
 
 ## 13. 常见问题
 
