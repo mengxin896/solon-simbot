@@ -47,7 +47,7 @@
     </dependency>
 
     <dependency>
-        <groupId>love.forte.simbot</groupId>
+        <groupId>io.github.mengxin896</groupId>
         <artifactId>simbot-solon-starter</artifactId>
         <version>0.1.0</version>
     </dependency>
@@ -59,7 +59,7 @@
 ```kotlin
 dependencies {
     implementation("org.noear:solon:3.4.1")
-    implementation("love.forte.simbot:simbot-solon-starter:0.1.0")
+    implementation("io.github.mengxin896:simbot-solon-starter:0.1.0")
 }
 ```
 

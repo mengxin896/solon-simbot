@@ -87,7 +87,7 @@
     </dependency>
 
     <dependency>
-        <groupId>love.forte.simbot</groupId>
+        <groupId>io.github.mengxin896</groupId>
         <artifactId>simbot-solon-starter</artifactId>
         <version>${simbot.solon.starter.version}</version>
     </dependency>

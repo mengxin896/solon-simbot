@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>love.forte.simbot.examples</groupId>
+    <groupId>io.github.mengxin896.examples</groupId>
     <artifactId>simbot-solon-demo</artifactId>
     <version>${revision}</version>
     <name>simbot-solon-demo</name>
@@ -29,7 +29,7 @@
             <version>${solon.version}</version>
         </dependency>
         <dependency>
-            <groupId>love.forte.simbot</groupId>
+            <groupId>io.github.mengxin896</groupId>
             <artifactId>simbot-solon-starter</artifactId>
             <version>${simbot.solon.starter.version}</version>
         </dependency>

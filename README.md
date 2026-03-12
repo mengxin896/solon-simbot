@@ -22,7 +22,7 @@
 
 ```xml
 <dependency>
-  <groupId>love.forte.simbot</groupId>
+  <groupId>io.github.mengxin896</groupId>
   <artifactId>simbot-solon-starter</artifactId>
   <version>0.1.0</version>
 </dependency>

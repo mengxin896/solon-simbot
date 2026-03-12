@@ -41,11 +41,11 @@
 ## 当前仓库发布前还需要人工确认的事项
 
 1. 确认最终 Maven 坐标
-   - 如果继续使用当前坐标，就要确保你已经拥有对应 namespace 的发布权限
-   - 如果准备改坐标，要同步更新 README、接入文档和示例工程
+   - 当前仓库已切到 `io.github.mengxin896:simbot-solon-starter`
+   - 正式发布前再确认 Central Portal 中对应 namespace 仍为 `Verified`
 2. 确认当前 `groupId` 是否具备发布权限
-   - 目前仍是 `love.forte.simbot`
-   - 如果你没有这个 namespace 的发布权限，需要先改成你实际拥有权限的命名空间
+   - 当前 `groupId` 为 `io.github.mengxin896`
+   - 需要与你已验证通过的 Central namespace 保持一致
 3. 准备 Maven Central 发布凭据
    - `CENTRAL_TOKEN_USERNAME`
    - `CENTRAL_TOKEN_PASSWORD`
