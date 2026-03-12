@@ -49,16 +49,29 @@
 3. 准备 Maven Central 发布凭据
    - `CENTRAL_TOKEN_USERNAME`
    - `CENTRAL_TOKEN_PASSWORD`
+   - 如果走 GitHub Actions，需要把这两个值配置到仓库 Secrets
 4. 准备 GPG 签名材料
    - 私钥
    - passphrase
+   - 如果走 GitHub Actions，对应 Secrets 名称为 `MAVEN_GPG_PRIVATE_KEY` 与 `MAVEN_GPG_PASSPHRASE`
 5. 选择发布执行方式
    - GitHub Actions 自动发布
    - 或本地手动执行 `mvn -B -Pcentral-release -DskipTests deploy`
 
+## 当前仓库已收口到什么程度
+
+1. 当前 `.mvn/maven.config` 已切到正式版本 `0.1.0`
+2. starter 坐标已经切到 `io.github.mengxin896:simbot-solon-starter`
+3. README、接入文档、示例工程依赖坐标都已同步
+4. GitHub Actions 已具备 CI / tag 发布流程
+5. 当前剩余阻塞点主要是：
+   - Central token
+   - GPG 私钥与口令
+   - 正式打 tag 并触发发布
+
 ## 建议的发布前自查
 
-1. 将 `.mvn/maven.config` 中的 `revision` 改成正式版，例如 `0.1.0`
+1. 确认 `.mvn/maven.config` 中的 `revision` 已是正式版，例如当前的 `0.1.0`
 2. 执行：
 
 ```bash
@@ -77,3 +90,9 @@ mvn -q -Pcentral-release -DskipTests verify
    - `docs/user-app-from-zero.md`
    - `docs/onebot11-napcat-guide.md`
    - `examples/*/pom.xml`
+6. 如果走 GitHub Actions 发布，确认仓库 Secrets 已配置完成后再打 tag：
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
