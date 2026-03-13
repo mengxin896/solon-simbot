@@ -15,6 +15,8 @@
 - [examples/demo-app-java/README.md](../examples/demo-app-java/README.md)
 - [examples/onebot11-napcat-demo/pom.xml](../examples/onebot11-napcat-demo/pom.xml)
 - [examples/onebot11-napcat-demo/README.md](../examples/onebot11-napcat-demo/README.md)
+- [examples/onebot11-napcat-demo-java/pom.xml](../examples/onebot11-napcat-demo-java/pom.xml)
+- [examples/onebot11-napcat-demo-java/README.md](../examples/onebot11-napcat-demo-java/README.md)
 
 ## 1. 这个 starter 会帮你做什么
 

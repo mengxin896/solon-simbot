@@ -1,0 +1,20 @@
+solon:
+  app:
+    name: simbot-solon-onebot11-napcat-demo-java
+
+simbot:
+  enabled: true
+  components:
+    autoInstallProviders: true
+    autoInstallProviderConfigures: true
+  plugins:
+    autoInstallProviders: true
+    autoInstallProviderConfigures: true
+  bots:
+    autoStartBots: true
+    autoStartMode: ASYNC
+    configurationJsonResources:
+      - "file:./simbot-bots/*.bot.json"
+    autoRegistrationResourceLoadFailurePolicy: ERROR
+    autoRegistrationFailurePolicy: ERROR
+    autoRegistrationMismatchConfigurableBotManagerPolicy: ERROR_LOG

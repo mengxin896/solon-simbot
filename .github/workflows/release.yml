@@ -54,6 +54,7 @@ jobs:
           mvn -B -f examples/demo-app/pom.xml -DskipTests compile exec:java
           mvn -B -f examples/demo-app-java/pom.xml -DskipTests compile exec:java
           mvn -B -f examples/onebot11-napcat-demo/pom.xml -DskipTests compile
+          mvn -B -f examples/onebot11-napcat-demo-java/pom.xml -DskipTests compile
 
       - name: Publish to Maven Central
         env:

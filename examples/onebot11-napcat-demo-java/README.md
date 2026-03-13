@@ -1,15 +1,15 @@
-# OneBot11 + NapCat Demo
+# OneBot11 + NapCat Demo Java
 
-这是一个基于 `simbot-solon-starter` 的真实联调示例工程。
-
-如果你的业务工程主要是 Java，可以看隔壁的 [../onebot11-napcat-demo-java/README.md](../onebot11-napcat-demo-java/README.md)。
+这是一个基于 `simbot-solon-starter` 的 Java 版真实联调示例工程。
 
 它演示的是：
 
 - Solon 自动加载 `simbot-solon-starter`
 - 通过 `simbot.bots.configurationJsonResources` 自动加载 OneBot v11 bot JSON
 - 连接本机 NapCat
-- 收到 `ping` 后回复 `pong`
+- Java `@Listener` 收到 `ping` 后回复 `pong`
+
+如果你的业务工程主要是 Kotlin，可以看隔壁的 [../onebot11-napcat-demo/README.md](../onebot11-napcat-demo/README.md)。
 
 ## 默认约定
 
@@ -18,7 +18,7 @@
 - bot 配置文件：`./simbot-bots/napcat.bot.json`
 - NapCat HTTP API：`http://127.0.0.1:3000`
 - NapCat 事件 WebSocket：`ws://127.0.0.1:3001`
-- `botUniqueId`：`sample-onebot`
+- `botUniqueId`：`sample-onebot-java`
 - `accessToken`：空
 
 ## 运行前准备
@@ -60,7 +60,7 @@ HTTP API 和事件 WebSocket 必须分开配置。
 进入示例目录执行：
 
 ```powershell
-cd examples/onebot11-napcat-demo
+cd examples/onebot11-napcat-demo-java
 mvn -q -DskipTests compile exec:java
 ```
 
@@ -69,7 +69,7 @@ mvn -q -DskipTests compile exec:java
 看到类似日志后，给机器人发 `ping`：
 
 ```text
-OneBot11 + NapCat demo started.
+OneBot11 + NapCat Java demo started.
 Current workdir: ...
 Bot configuration file: ./simbot-bots/napcat.bot.json
 If NapCat is already connected, send `ping` to the bot and it should reply `pong`.
@@ -81,7 +81,7 @@ If NapCat is already connected, send `ping` to the bot and it should reply `pong
 - OneBot 组件自动安装成功
 - bot JSON 自动扫描成功
 - NapCat HTTP / WebSocket 均连接成功
-- `@Listener` 消息监听成功
+- Java `@Listener` 消息监听与回复成功
 
 ## 为什么 CI 只编译不运行
 

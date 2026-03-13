@@ -40,7 +40,6 @@ import love.forte.simbot.solon.config.SimbotSolonProperties
 import org.noear.solon.core.AppContext
 import org.noear.solon.core.util.ResourceUtil
 import java.io.IOException
-import java.net.URL
 
 internal class SimbotSolonBotAutoLoader(
     private val appContext: AppContext,
@@ -118,20 +117,13 @@ internal class SimbotSolonBotAutoLoader(
 
     private fun resolveAllResourceUris(): List<String> {
         val ignoreIO = properties.ignoreIOExceptionForResourcesLoad
+        val classLoader = Thread.currentThread().contextClassLoader ?: appContext.classLoader
 
         return properties.configurationJsonResources
             .asSequence()
             .flatMap { expr ->
-                val schemaPrefix = when {
-                    ResourceUtil.hasClasspath(expr) -> ResourceUtil.TAG_classpath
-                    ResourceUtil.hasFile(expr) -> ResourceUtil.TAG_file
-                    else -> ""
-                }
-
                 try {
-                    ResourceUtil.scanResources(appContext.classLoader, expr)
-                        .asSequence()
-                        .map { path -> schemaPrefix + path }
+                    BotConfigurationResourceResolver.resolveResourceUris(classLoader, expr).asSequence()
                 } catch (e: Throwable) {
                     val io = (e as? IOException) ?: (e.cause as? IOException)
                     if (io != null && ignoreIO) {
@@ -157,13 +149,11 @@ internal class SimbotSolonBotAutoLoader(
     }
 
     private fun loadResourceContent(policy: BotConfigResourceLoadFailurePolicy, uri: String): String? {
-        val url = ResourceUtil.findResourceOrFile(appContext.classLoader, uri)
+        val classLoader = Thread.currentThread().contextClassLoader ?: appContext.classLoader
 
-        if (url == null) {
-            return handleResourceLoadFailure(policy, uri, null)
-        }
-
-        val content = runCatching { ResourceUtil.getResourceAsString(url) }.getOrElse { e ->
+        val content = runCatching {
+            BotConfigurationResourceResolver.loadResourceContent(classLoader, uri)
+        }.getOrElse { e ->
             if (e is IOException) {
                 return handleResourceLoadFailure(policy, uri, e)
             }
@@ -359,4 +349,3 @@ internal class BotRegisterFailureException(message: String?, cause: Throwable?) 
 internal class BotAutoStartOnFailureException(message: String?, cause: Throwable?) : RuntimeException(message, cause) {
     constructor(cause: Throwable) : this(cause.message, cause)
 }
-

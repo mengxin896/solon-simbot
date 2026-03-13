@@ -135,6 +135,7 @@ mvn -q test
 - [examples/demo-app/README.md](examples/demo-app/README.md)
 - [examples/demo-app-java/README.md](examples/demo-app-java/README.md)
 - [examples/onebot11-napcat-demo/README.md](examples/onebot11-napcat-demo/README.md)
+- [examples/onebot11-napcat-demo-java/README.md](examples/onebot11-napcat-demo-java/README.md)
 
 ## 当前限制
 

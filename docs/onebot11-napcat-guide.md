@@ -19,6 +19,9 @@
 - [examples/onebot11-napcat-demo/src/main/resources/app.yml](../examples/onebot11-napcat-demo/src/main/resources/app.yml)
 - [examples/onebot11-napcat-demo/simbot-bots/napcat.bot.json](../examples/onebot11-napcat-demo/simbot-bots/napcat.bot.json)
 - [examples/onebot11-napcat-demo/src/main/kotlin/love/forte/simbot/solon/onebot11/demo/OneBot11NapCatDemoApp.kt](../examples/onebot11-napcat-demo/src/main/kotlin/love/forte/simbot/solon/onebot11/demo/OneBot11NapCatDemoApp.kt)
+- [examples/onebot11-napcat-demo-java/pom.xml](../examples/onebot11-napcat-demo-java/pom.xml)
+- [examples/onebot11-napcat-demo-java/README.md](../examples/onebot11-napcat-demo-java/README.md)
+- [examples/onebot11-napcat-demo-java/src/main/java/love/forte/simbot/solon/onebot11/demo/javaapp/OneBot11NapCatJavaDemoApp.java](../examples/onebot11-napcat-demo-java/src/main/java/love/forte/simbot/solon/onebot11/demo/javaapp/OneBot11NapCatJavaDemoApp.java)
 
 ## 1. 先理解这条链路
 
@@ -119,6 +122,8 @@ your-app/
 └─ simbot-bots/
    └─ napcat.bot.json
 ```
+
+如果你的业务工程是 Java，把 `src/main/kotlin` 改成 `src/main/java` 即可；可直接对照 [examples/onebot11-napcat-demo-java](../examples/onebot11-napcat-demo-java)。
 
 这里我建议把 bot JSON 放到外部目录 `simbot-bots/`，而不是 `src/main/resources/simbot-bots/`。
 
@@ -222,6 +227,30 @@ object App {
 }
 ```
 
+Java 写法可以直接对照：
+
+```java
+package com.example;
+
+import love.forte.simbot.application.Application;
+import org.noear.solon.Solon;
+
+import java.nio.file.Paths;
+
+public class App {
+    public static void main(String[] args) {
+        var solonApp = Solon.start(App.class, args);
+        var application = (Application) solonApp.context().getBean("simbotApplication");
+        if (application == null) {
+            throw new IllegalStateException("simbotApplication bean not found");
+        }
+
+        System.out.println("Current workdir: " + Paths.get("").toAbsolutePath());
+        application.joinBlocking();
+    }
+}
+```
+
 这里不需要手动注册 OneBot bot。
 只要：
 
@@ -258,6 +287,30 @@ class PingListener {
 
         println("receive message from ${event.authorId}: $text")
         event.reply("pong")
+    }
+}
+```
+
+Java 写法可以直接用 blocking API：
+
+```java
+package com.example;
+
+import love.forte.simbot.event.MessageEvent;
+import love.forte.simbot.quantcat.common.annotations.Listener;
+import org.noear.solon.annotation.Component;
+
+@Component
+public class PingListener {
+    @Listener
+    public void onMessage(MessageEvent event) {
+        var plainText = event.getMessageContent().getPlainText();
+        var text = plainText == null ? "" : plainText.trim();
+        if (!"ping".equals(text)) {
+            return;
+        }
+
+        event.replyBlocking("pong");
     }
 }
 ```
@@ -329,7 +382,7 @@ mvn -q compile exec:java
 3. 代码里注册 OneBot bot
 4. 如果启动失败，等待几秒后继续重试
 
-当前仓库提供的 `examples/onebot11-napcat-demo` 走的是“自动加载 bot JSON”的方式，更适合作为用户工程模板。
+当前仓库提供的 `examples/onebot11-napcat-demo` 和 `examples/onebot11-napcat-demo-java` 都走的是“自动加载 bot JSON”的方式，更适合作为用户工程模板。
 如果你的场景必须依赖外层重试，可以在业务应用启动阶段按上面的思路自行扩展。
 
 ## 13. 常见问题

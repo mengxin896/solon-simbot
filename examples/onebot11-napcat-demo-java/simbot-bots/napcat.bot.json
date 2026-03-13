@@ -1,0 +1,13 @@
+{
+  "component": "simbot.onebot11",
+  "authorization": {
+    "botUniqueId": "sample-onebot-java",
+    "apiServerHost": "http://127.0.0.1:3000",
+    "eventServerHost": "ws://127.0.0.1:3001",
+    "accessToken": ""
+  },
+  "config": {
+    "wsConnectMaxRetryTimes": 999999,
+    "wsConnectRetryDelayMillis": 3000
+  }
+}

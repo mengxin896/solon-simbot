@@ -13,14 +13,18 @@
   - 验证 Java `@Listener` 注册、事件投递和 Solon bean 参数注入
   - 适合 Java 业务工程先确认 starter 接入链路
 - `onebot11-napcat-demo`
-  - OneBot v11 + NapCat 实战示例
+  - Kotlin 版 OneBot v11 + NapCat 实战示例
   - 验证 bot JSON 自动扫描、OneBot 组件接入、NapCat 联调与消息回复
+  - 依赖本机 NapCat 和真实 QQ 登录状态
+- `onebot11-napcat-demo-java`
+  - Java 版 OneBot v11 + NapCat 实战示例
+  - 验证 Java `@Listener` 消息接收、消息回复和 bot JSON 自动加载
   - 依赖本机 NapCat 和真实 QQ 登录状态
 
 ## 推荐使用顺序
 
 1. 如果你的业务工程是 Kotlin，先运行 `demo-app`；如果主要是 Java，先运行 `demo-app-java`。
-2. 再运行 `onebot11-napcat-demo`，确认真实机器人接入链路也能工作。
+2. 如果你的业务工程是 Kotlin，继续看 `onebot11-napcat-demo`；如果主要是 Java，继续看 `onebot11-napcat-demo-java`。
 
 ## 通用前置步骤
 
