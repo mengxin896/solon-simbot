@@ -53,6 +53,8 @@
 4. 准备 GPG 签名材料
    - 私钥
    - passphrase
+   - 对应公钥必须提前发布到 Central 可检索的 key server（本仓库已验证 `keyserver.ubuntu.com` 可用）
+   - 发布后要用完整指纹做一次回读校验，避免只是在本地 keyring 可见、远端仍查不到
    - 如果走 GitHub Actions，对应 Secrets 名称为 `MAVEN_GPG_PRIVATE_KEY` 与 `MAVEN_GPG_PASSPHRASE`
 5. 选择发布执行方式
    - GitHub Actions 自动发布
@@ -95,4 +97,17 @@ mvn -q -Pcentral-release -DskipTests verify
 ```bash
 git tag v0.1.0
 git push origin v0.1.0
+```
+
+7. 如果这是第一次使用这把 GPG key 发版，先补做公钥发布与校验：
+
+```bash
+"C:\Program Files\Git\usr\bin\gpg.exe" --armor --export <KEY_ID>
+```
+
+   - 将导出的公钥提交到 `https://keyserver.ubuntu.com/`
+   - 再用完整指纹检查是否已经能被检索，例如：
+
+```text
+https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x<完整指纹>
 ```
