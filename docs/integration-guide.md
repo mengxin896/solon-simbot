@@ -11,6 +11,8 @@
 
 - [examples/demo-app/pom.xml](../examples/demo-app/pom.xml)
 - [examples/demo-app/README.md](../examples/demo-app/README.md)
+- [examples/demo-app-java/pom.xml](../examples/demo-app-java/pom.xml)
+- [examples/demo-app-java/README.md](../examples/demo-app-java/README.md)
 - [examples/onebot11-napcat-demo/pom.xml](../examples/onebot11-napcat-demo/pom.xml)
 - [examples/onebot11-napcat-demo/README.md](../examples/onebot11-napcat-demo/README.md)
 
@@ -21,7 +23,7 @@
 1. 通过 `META-INF/solon/*.properties` 被 Solon 自动发现并加载
 2. 读取 `simbot.*` 配置并决定是否启用 starter
 3. 构建并注册 Simbot `Application`
-4. 扫描 Solon 容器中的 bean，自动注册标注了 `@Listener` 的 Kotlin 监听函数
+4. 扫描 Solon 容器中的 bean，自动注册标注了 `@Listener` 的监听方法
 5. 根据配置自动安装可发现的 component / plugin providers
 6. 按配置扫描 bot JSON 资源，完成 bot 注册与自动启动
 
@@ -86,10 +88,12 @@ your-app/
 
 - `simbot-bots/` 目录是可选的，只在你要使用 bot 自动加载时需要
 - 如果 bot 配置包含敏感信息，更推荐使用外部目录，例如 `file:./simbot-bots/*.bot.json`
+- 如果你的业务工程是 Java，把 `src/main/kotlin` 改成 `src/main/java` 即可；可直接对照 [examples/demo-app-java](../examples/demo-app-java)
 
 ## 5. 启动 Solon 应用
 
-你只需要正常启动自己的 Solon 应用，不需要额外写 `@Enable...` 注解：
+你只需要正常启动自己的 Solon 应用，不需要额外写 `@Enable...` 注解。
+Kotlin 和 Java 都是普通的 Solon 启动类：
 
 ```kotlin
 package com.example
@@ -104,6 +108,18 @@ object App {
 }
 ```
 
+```java
+package com.example;
+
+import org.noear.solon.Solon;
+
+public class App {
+    public static void main(String[] args) {
+        Solon.start(App.class, args);
+    }
+}
+```
+
 starter 会在 Solon 启动过程中自动完成 simbot 的初始化。
 
 ## 6. 写第一个监听器
@@ -111,9 +127,9 @@ starter 会在 Solon 启动过程中自动完成 simbot 的初始化。
 监听器函数必须满足下面两个条件：
 
 1. 所在类必须是 Solon bean，例如 `@Component`
-2. 方法必须是 Kotlin 函数，并标注 `@Listener`
+2. 方法必须标注 `@Listener`，Kotlin / Java 都可以
 
-示例：
+Kotlin 示例：
 
 ```kotlin
 package com.example.listener
@@ -136,10 +152,36 @@ class MyListeners {
 }
 ```
 
+Java 示例：
+
+```java
+package com.example.listener;
+
+import love.forte.simbot.event.Event;
+import love.forte.simbot.quantcat.common.annotations.Listener;
+import org.noear.solon.annotation.Component;
+
+@Component
+public class MyService {
+    public String ping() {
+        return "pong";
+    }
+}
+
+@Component
+public class MyListeners {
+    @Listener
+    public void onEvent(Event event, MyService service) {
+        System.out.println("receive event=" + event + ", service=" + service.ping());
+    }
+}
+```
+
 这个例子里：
 
 - `event` 会由 simbot 事件调度器提供
 - `service` 会按“参数类型 -> Solon 容器”的方式自动注入
+- Java 场景里建议把 bean 类声明为 `public`，避免容器反射实例化受限
 
 ## 7. 配置 starter
 
@@ -259,6 +301,8 @@ starter 本身不提供 OneBot、QQ、KOOK 等协议实现，它只负责：
 
 - [examples/demo-app/pom.xml](../examples/demo-app/pom.xml)
 - [examples/demo-app/src/main/kotlin/love/forte/simbot/solon/demo/DemoApp.kt](../examples/demo-app/src/main/kotlin/love/forte/simbot/solon/demo/DemoApp.kt)
+- [examples/demo-app-java/pom.xml](../examples/demo-app-java/pom.xml)
+- [examples/demo-app-java/src/main/java/love/forte/simbot/solon/demo/javaapp/DemoJavaApp.java](../examples/demo-app-java/src/main/java/love/forte/simbot/solon/demo/javaapp/DemoJavaApp.java)
 
 ## 12. 常见坑
 
@@ -267,7 +311,7 @@ starter 本身不提供 OneBot、QQ、KOOK 等协议实现，它只负责：
 优先检查：
 
 1. 类上是否有 `@Component`
-2. 方法是否真的是 Kotlin 函数，而不是 Java 方法
+2. 如果你写的是 Java，bean 类型是否为 `public`
 3. 方法上是否有 `@Listener`
 4. 应用是否真的把该类扫进了 Solon 容器
 
@@ -289,7 +333,7 @@ starter 本身不提供 OneBot、QQ、KOOK 等协议实现，它只负责：
 
 - `@Listener` 扫描目前基于 bean 的 `declaredMethods`
 - 父类方法不会被扫描到
-- Java 方法会因为拿不到 `kotlinFunction` 而被跳过
+- Java `@Listener` 方法当前不支持 `@ApplyBinder` 自定义 binder
 - 参数注入当前按“参数类型 -> Solon 容器”匹配，暂不支持更复杂的名称/限定符/泛型精确匹配
 - 仓库已提供 OneBot11 + NapCat 的端到端示例；其他平台 demo 仍待补充
 
@@ -299,6 +343,8 @@ starter 本身不提供 OneBot、QQ、KOOK 等协议实现，它只负责：
 
 - [examples/demo-app/src/main/kotlin/love/forte/simbot/solon/demo/DemoApp.kt](../examples/demo-app/src/main/kotlin/love/forte/simbot/solon/demo/DemoApp.kt)
 - [examples/demo-app/README.md](../examples/demo-app/README.md)
+- [examples/demo-app-java/src/main/java/love/forte/simbot/solon/demo/javaapp/DemoJavaApp.java](../examples/demo-app-java/src/main/java/love/forte/simbot/solon/demo/javaapp/DemoJavaApp.java)
+- [examples/demo-app-java/README.md](../examples/demo-app-java/README.md)
 
 如果你要看“真实机器人平台接入”的完整模板，再继续看：
 

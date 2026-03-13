@@ -5,9 +5,13 @@
 ## 示例列表
 
 - `demo-app`
-  - 最小闭环示例
+  - Kotlin 最小闭环示例
   - 验证 starter 自动加载、`simbotApplication` 暴露、`@Listener` 注册和 Solon bean 参数注入
   - 不依赖外部机器人平台，适合做第一轮验收
+- `demo-app-java`
+  - Java 最小闭环示例
+  - 验证 Java `@Listener` 注册、事件投递和 Solon bean 参数注入
+  - 适合 Java 业务工程先确认 starter 接入链路
 - `onebot11-napcat-demo`
   - OneBot v11 + NapCat 实战示例
   - 验证 bot JSON 自动扫描、OneBot 组件接入、NapCat 联调与消息回复
@@ -15,7 +19,7 @@
 
 ## 推荐使用顺序
 
-1. 先运行 `demo-app`，确认 starter 最小闭环已经跑通。
+1. 如果你的业务工程是 Kotlin，先运行 `demo-app`；如果主要是 Java，先运行 `demo-app-java`。
 2. 再运行 `onebot11-napcat-demo`，确认真实机器人接入链路也能工作。
 
 ## 通用前置步骤

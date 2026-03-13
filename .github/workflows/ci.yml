@@ -28,5 +28,8 @@ jobs:
       - name: Run demo app
         run: mvn -B -f examples/demo-app/pom.xml -DskipTests compile exec:java
 
+      - name: Run Java demo app
+        run: mvn -B -f examples/demo-app-java/pom.xml -DskipTests compile exec:java
+
       - name: Compile OneBot11 NapCat demo
         run: mvn -B -f examples/onebot11-napcat-demo/pom.xml -DskipTests compile

@@ -35,7 +35,8 @@ public class SimbotSolonListenerScanner(
     private val appContext: AppContext,
     private val binderManager: BinderManager,
 ) {
-    private val processor = KFunctionEventListenerProcessor()
+    private val kotlinProcessor = KFunctionEventListenerProcessor()
+    private val javaProcessor = JavaMethodEventListenerProcessor()
 
     public fun scan(): List<SimbotEventListenerResolver> {
         val resolvers = mutableListOf<SimbotEventListenerResolver>()
@@ -51,19 +52,33 @@ public class SimbotSolonListenerScanner(
                 .filterNot { it.isSynthetic }
                 .forEach { method ->
                     val listenerAnnotation = method.getAnnotation(Listener::class.java) ?: return@forEach
-                    val function = method.kotlinFunction ?: run {
-                        logger.debug(
-                            "Method {} on bean {} has @Listener but kotlinFunction is null, skip.",
-                            method,
-                            rawType.name
+                    val applyBinder = method.getAnnotation(ApplyBinder::class.java)
+                    val function = method.kotlinFunction
+
+                    if (function == null) {
+                        if (applyBinder != null) {
+                            logger.warn(
+                                "Method {} on bean {} uses @ApplyBinder, but custom binder resolution is not " +
+                                    "supported for Java listener methods yet. Ignore applyBinder.",
+                                method,
+                                rawType.name
+                            )
+                        }
+
+                        resolvers.add(
+                            javaProcessor.process(
+                                beanName = beanName,
+                                beanInstance = instance,
+                                method = method,
+                                listenerAnnotation = listenerAnnotation,
+                                appContext = appContext
+                            )
                         )
                         return@forEach
                     }
 
-                    val applyBinder = method.getAnnotation(ApplyBinder::class.java)
-
                     resolvers.add(
-                        processor.process(
+                        kotlinProcessor.process(
                             beanName = beanName,
                             beanInstance = instance,
                             function = function,

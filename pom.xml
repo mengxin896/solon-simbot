@@ -50,6 +50,7 @@
         <maven.enforcer.plugin.version>3.5.0</maven.enforcer.plugin.version>
         <maven.gpg.plugin.version>3.2.7</maven.gpg.plugin.version>
         <flatten.maven.plugin.version>1.6.0</flatten.maven.plugin.version>
+        <build.helper.maven.plugin.version>3.6.0</build.helper.maven.plugin.version>
         <central.publishing.plugin.version>0.10.0</central.publishing.plugin.version>
     </properties>
 
@@ -145,6 +146,26 @@
                         </goals>
                         <configuration>
                             <jvmTarget>${maven.compiler.release}</jvmTarget>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build.helper.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-java-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.basedir}/src/test/java</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.mengxin896.examples</groupId>
+    <artifactId>simbot-solon-demo-java</artifactId>
+    <version>${revision}</version>
+    <name>simbot-solon-demo-java</name>
+    <description>Java demo Solon application for simbot-solon-starter</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+
+        <solon.version>3.4.1</solon.version>
+
+        <!-- 使用本仓库发布的 starter 版本号；在 root 执行 mvn install 后即可被本地解析 -->
+        <simbot.solon.starter.version>${revision}</simbot.solon.starter.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon</artifactId>
+            <version>${solon.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.mengxin896</groupId>
+            <artifactId>simbot-solon-starter</artifactId>
+            <version>${simbot.solon.starter.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <mainClass>love.forte.simbot.solon.demo.javaapp.DemoJavaApp</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

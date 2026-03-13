@@ -2,6 +2,9 @@
 
 本文档面向第一次接触 `simbot-solon-starter` 的用户。
 
+本文以下步骤使用 Kotlin 来演示最小工程。
+如果你要的是纯 Java 版最小闭环，直接参考 [examples/demo-app-java](../examples/demo-app-java)。
+
 目标不是接入真实机器人平台，而是先验证三件事：
 
 1. starter 能被 Solon 自动加载
@@ -265,7 +268,7 @@ listener invoked. eventId=..., message=hello from solon bean
 
 1. 监听器类上是否有 `@Component`
 2. 监听方法上是否有 `@Listener`
-3. 方法是否是 Kotlin 方法，而不是 Java 方法
+3. 如果你按本文走的是 Kotlin 版，监听器源码是否真的位于 `src/main/kotlin` 并已参与编译；如果你写 Java，直接参考 `examples/demo-app-java`
 
 ## 10. 下一步做什么
 

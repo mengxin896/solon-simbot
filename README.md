@@ -6,7 +6,7 @@
 
 - 自动加载 Solon Plugin（`META-INF/solon/*.properties`）
 - 在应用启动时创建 Simbot `Application`
-- 自动扫描并注册 `@Listener` 事件处理函数
+- 自动扫描并注册 Kotlin / Java 的 `@Listener` 事件处理函数
 - 支持在监听函数参数中通过 Solon 容器进行依赖注入
 - 支持按配置自动扫描 bot JSON，并完成注册与自动启动
 
@@ -32,7 +32,7 @@
 
 如果你是直接从源码运行当前仓库里的示例工程，可以先在仓库根目录执行：
 
-```bash
+```powershell
 mvn -q -DskipTests install
 ```
 
@@ -62,6 +62,8 @@ simbot:
 
 ### 3. 编写 Listener
 
+Kotlin：
+
 ```kotlin
 import love.forte.simbot.event.Event
 import love.forte.simbot.quantcat.common.annotations.Listener
@@ -79,18 +81,45 @@ class MyListeners {
 class MyService
 ```
 
+Java：
+
+```java
+import love.forte.simbot.event.Event;
+import love.forte.simbot.quantcat.common.annotations.Listener;
+import org.noear.solon.annotation.Component;
+
+@Component
+public class MyListeners {
+    @Listener
+    public void onEvent(Event event, MyService myService) {
+        // myService 会由 Solon 容器自动注入
+    }
+}
+
+@Component
+public class MyService {
+}
+```
+
 ### 4. 运行与验证
 
 你可以先直接运行仓库内的最小示例工程：
 
-```bash
+```powershell
 cd examples/demo-app
+mvn -q -DskipTests compile exec:java
+```
+
+如果你是 Java 工程，也可以运行纯 Java 版示例：
+
+```powershell
+cd examples/demo-app-java
 mvn -q -DskipTests compile exec:java
 ```
 
 也可以执行仓库自带测试：
 
-```bash
+```powershell
 mvn -q test
 ```
 
@@ -104,12 +133,13 @@ mvn -q test
 
 - [examples/README.md](examples/README.md)
 - [examples/demo-app/README.md](examples/demo-app/README.md)
+- [examples/demo-app-java/README.md](examples/demo-app-java/README.md)
 - [examples/onebot11-napcat-demo/README.md](examples/onebot11-napcat-demo/README.md)
 
 ## 当前限制
 
 - `@Listener` 扫描目前仅扫描所有 bean 的 `declaredMethods`，不包含父类方法。
-- Java 方法会因为拿不到 `kotlinFunction` 而被跳过，当前仅支持 Kotlin 监听函数。
+- Java `@Listener` 方法当前不支持 `@ApplyBinder` 自定义 binder。
 - 监听函数参数注入目前按“参数类型 -> Solon 容器”匹配，暂未支持更复杂的名称或限定符场景。
 - 已提供 OneBot11 + NapCat 实战示例；其他平台组件示例仍可继续补充。
 

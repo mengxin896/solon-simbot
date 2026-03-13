@@ -2,6 +2,8 @@
 
 这是仓库里最小、最适合先跑通的示例工程。
 
+如果你的业务工程主要是 Java，直接看隔壁的 [../demo-app-java/README.md](../demo-app-java/README.md)。
+
 它演示的是：
 
 - 业务应用像真实用户工程一样，通过 Maven 依赖引入 `simbot-solon-starter`
